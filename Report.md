@@ -14,8 +14,13 @@ During routine monitoring of dark web sources and breach repositories, credentia
   - Stealer malware targeting corporate endpoints.  
 
 ---
+## 3a. Investigation Timeline
+- **2025-09-01:** Dark web crawler flagged bulk ACME credential dump.
+- **2025-09-02:** Cross-referenced emails in open breach repositories (HIBP, stealer logs).
+- **2025-09-03:** Validated sample hashes against ACME domain via OSINT — confirmed live accounts.
+- **2025-09-04:** Reported to ACME security team; forced password resets initiated.
 
-## 3. Campaign Analysis
+## 3b. Campaign Analysis
 - **Discovery Source:** Dark web marketplace and open breach repositories.  
 - **Dataset Details:**  
   - ~3,500 email/password pairs linked to `@acme.com` domains.  
@@ -49,8 +54,15 @@ During routine monitoring of dark web sources and breach repositories, credentia
 *(All credentials are redacted; this table represents the format only)*  
 
 ---
-
-## 6. Defensive Recommendations
+## 6a. Detection Examples
+- **Splunk search:** detect >5 failed logins followed by success within 10 min  
+  ```spl
+  index=auth sourcetype=winlogon
+  | stats count as failed by user, src_ip, bin(_time,10m)
+  | where failed > 5
+-SIEM alert: login from geo-location not seen in last 90 days for a given user.
+Suricata rule: flag outbound traffic to known phishing domains tied to campaign.
+## 6b. Defensive Recommendations
 1. **Force password resets** for all affected users.  
 2. **Enable MFA** on all accounts, prioritizing email, VPN, and SaaS logins.  
 3. **Deploy monitoring** for credential stuffing and brute force attempts.  
@@ -65,3 +77,8 @@ During routine monitoring of dark web sources and breach repositories, credentia
 - Hudson Rock – Cybercrime Intelligence on Stealer Logs  
 - CrowdStrike MITRE ATT&CK Navigator  
 - [The Register – 620M hacked accounts sale](https://www.theregister.com/2019/02/11/620_million_hacked_accounts_dark_web/)  
+
+## 8. Lessons Learned
+- Credential reuse and weak hashing continue to fuel ATO and phishing.
+- Dark-web monitoring plus identity protection reduces dwell time.
+- Need for automated ingestion of leaked credential feeds into SIEM for proactive alerts.
