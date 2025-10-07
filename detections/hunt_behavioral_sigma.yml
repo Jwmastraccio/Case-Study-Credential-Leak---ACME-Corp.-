@@ -1,0 +1,34 @@
+title: Credential Misuse Followed By Lateral Movement
+id: acme-credential-misuse-lateral-2025-01
+status: experimental
+description: Detects multiple failed logons followed by success, then PsExec/PowerShell activity
+author: J. Mastraccio
+date: 2025/10/07
+references:
+  - https://attack.mitre.org/techniques/T1078/
+  - https://attack.mitre.org/techniques/T1110/
+  - https://attack.mitre.org/techniques/T1021/002/
+  - https://attack.mitre.org/techniques/T1059/001/
+logsource:
+  product: windows
+  service: security
+detection:
+  selection_fail:
+    status: failed
+  selection_success:
+    status: success
+  timeframe: 15m
+  condition: selection_fail | count() by user >= 2
+             and selection_success by user
+fields:
+  - user
+  - source_ip
+  - host
+falsepositives:
+  - Password resets, user error
+level: medium
+tags:
+  - attack.T1078
+  - attack.T1110
+  - attack.T1021
+  - attack.T1059
