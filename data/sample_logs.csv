@@ -1,1 +1,5 @@
-
+timestamp,host,user,source_ip,destination_ip,process,event_type,status
+2025-09-20T03:15:22Z,ACME-DC01,jsmith,203.0.113.55,10.10.1.20,logon,authentication,failed
+2025-09-20T03:15:25Z,ACME-DC01,jsmith,203.0.113.55,10.10.1.20,logon,authentication,success
+2025-09-20T03:16:10Z,ACME-FS01,jsmith,10.10.1.20,10.10.2.40,psexec,process_creation,success
+2025-09-20T03:17:00Z,ACME-FS01,jsmith,10.10.1.20,198.51.100.88,powershell,process_creation,success
