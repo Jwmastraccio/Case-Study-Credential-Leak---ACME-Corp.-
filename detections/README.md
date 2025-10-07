@@ -1,14 +1,17 @@
 # Detections
 
-This folder contains **hunt queries and detection logic** used in the ACME Credential-Leak case study.
+This folder contains hunt logic used in the ACME credential-leak case study.
 
 ## Files
-- `hunt_ioc_query.spl` – Splunk-style query for matching leaked accounts/IPs
-- `hunt_behavioral_query.spl` – heuristic query for suspicious login & lateral movement
-- `hunt_behavioral_sigma.yml` – Sigma rule equivalent
-- `enrichment_notebook.ipynb` – optional Python enrichment demo
+- `hunt_ioc_query.spl` — Finds events linked to leaked users/IPs (IOC hunt).
+- `hunt_behavioral_query.spl` — Flags brute-force → success → lateral movement.
+- `hunt_behavioral_sigma.yml` — Sigma version of the behavioral hunt.
 
-Each query is documented with:
-- ATT&CK technique(s) addressed
-- Usage notes
-- Expected output (screenshots in `/visuals`)
+## Data Assumptions
+We load `data/sample_logs.csv` into a Splunk index called `acme_logs` for demo. If you’re not using Splunk, treat the SPL as pseudocode and use the Sigma rule.
+
+## MITRE ATT&CK
+- T1078 (Valid Accounts)
+- T1110 (Brute Force)
+- T1021 (Remote Services – PsExec)
+- T1059 (PowerShell)
