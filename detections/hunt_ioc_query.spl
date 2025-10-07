@@ -1,0 +1,6 @@
+## IOC-based Hunt Query – Credential Leak
+## Purpose: Find authentication or process events linked to known leaked accounts or IOCs
+
+index=acme_logs
+( user IN ("jsmith","adoe") OR source_ip IN ("203.0.113.55","198.51.100.88") )
+| table _time host user source_ip destination_ip process event_type status
