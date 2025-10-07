@@ -1,0 +1,9 @@
+## Behavior-based Hunt – Credential Misuse and Lateral Movement
+## ATT&CK Techniques: T1078 (Valid Accounts), T1021 (Remote Services)
+
+index=acme_logs
+event_type=authentication status=failed
+| stats count AS failed_attempts BY user, source_ip, host
+| where failed_attempts > 5
+| join user [ search index=acme_logs event_type=authentication status=success ]
+| table _time user source_ip host destination_ip process
