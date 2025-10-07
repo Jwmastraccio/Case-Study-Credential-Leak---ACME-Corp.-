@@ -1,5 +1,10 @@
-timestamp,host,user,source_ip,destination_ip,process,event_type,status
-2025-09-20T03:15:22Z,ACME-DC01,jsmith,203.0.113.55,10.10.1.20,logon,authentication,failed
-2025-09-20T03:15:25Z,ACME-DC01,jsmith,203.0.113.55,10.10.1.20,logon,authentication,success
-2025-09-20T03:16:10Z,ACME-FS01,jsmith,10.10.1.20,10.10.2.40,psexec,process_creation,success
-2025-09-20T03:17:00Z,ACME-FS01,jsmith,10.10.1.20,198.51.100.88,powershell,process_creation,success
+timestamp,host,user,source_ip,destination_ip,process,event_type,status,cmdline
+2025-09-20T03:14:50Z,ACME-VPN01,jsmith,203.0.113.55,10.10.1.20,logon,authentication,failed,""
+2025-09-20T03:15:02Z,ACME-VPN01,jsmith,203.0.113.55,10.10.1.20,logon,authentication,failed,""
+2025-09-20T03:15:22Z,ACME-VPN01,jsmith,203.0.113.55,10.10.1.20,logon,authentication,success,""
+2025-09-20T03:16:10Z,ACME-FS01,jsmith,10.10.1.20,10.10.2.40,psexec,process_creation,success,"psexec \\ACME-FS01 -u ACME\jsmith -p ***** cmd.exe"
+2025-09-20T03:16:35Z,ACME-FS01,jsmith,10.10.1.20,10.10.2.40,cmd.exe,process_creation,success,"cmd.exe /c whoami && net use"
+2025-09-20T03:17:00Z,ACME-FS01,jsmith,10.10.1.20,198.51.100.88,powershell,process_creation,success,"powershell -nop -w hidden -enc <redacted>"
+2025-09-20T03:19:42Z,ACME-WS23,adoe,198.51.100.77,10.10.1.33,logon,authentication,failed,""
+2025-09-20T03:20:10Z,ACME-WS23,adoe,198.51.100.77,10.10.1.33,logon,authentication,failed,""
+2025-09-20T03:20:55Z,ACME-WS23,adoe,198.51.100.77,10.10.1.33,logon,authentication,success,""
